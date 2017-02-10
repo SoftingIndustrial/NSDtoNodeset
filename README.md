@@ -3,6 +3,9 @@ Tool to convert IEC 61850-7-7 NSD files to OPC UA nodeset files.
 
 This tool is used to generate the OPC UA nodeset files for the IEC 61850 OPC UA companion specification.
 
+The Start*.bat files generate the nodeset files for the IEC 61850 OPC UA companion specification.
+To successfully run the .bat scripts you have to get the needed NSD files from IEC.
+
 ## Build
 NSDtoNodeset is written in C# using the .NET framework V4.5.2. <br>
 Microsoft Visual Studio 2015 is used to build it. 
@@ -10,10 +13,10 @@ Microsoft Visual Studio 2015 is used to build it.
 ## Command line arguments
 * /nsd < file name ><br>
   Name of the NSD file to convert.<br>
-  <br>This argument could be used multiple times.
+  This argument could be used multiple times.
 * /nsdBase < file name ><br>
   Name of the NSD file used for base type information.<br>
-  <br>This argument could be used multiple times.
+  This argument could be used multiple times.
 * /nodeset < file name ><br>
   Name of the generated nodeset file
 * /nodesetUrl < URL string ><br>

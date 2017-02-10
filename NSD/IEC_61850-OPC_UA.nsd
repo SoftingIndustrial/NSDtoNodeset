@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NS xmlns="http://www.iec.ch/61850/2016/NSD" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.iec.ch/61850/2016/NSD NSD.xsd" id="IEC 61850 OPC UA">
+
+	<AbstractObjectType name="IEC61850DOBaseObjectType">
+	</AbstractObjectType>
+
+	<AbstractObjectType name="IEC61850LNodeBaseObjectType">
+	</AbstractObjectType>
+
+	<ConstructedAttribute name="Timestamp">
+		<SubDataAttribute name="SecondSinceEpoch" type="INT32U" presCond="M"/>
+		<SubDataAttribute name="FractionOfSecond" type="INT32U" presCond="M"/>
+		<SubDataAttribute name="TimeQuality" type="TimeQuality" typeKind="CONSTRUCTED" presCond="M"/>
+	</ConstructedAttribute>
+
+	<ConstructedAttribute name="TimeQuality">
+		<SubDataAttribute name="LeapSecondsKnown" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="ClockFailure" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="ClockNotSynchronized" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="TimeAccuracy" type="INT8" presCond="M"/>
+	</ConstructedAttribute>
+
+	<ConstructedAttribute name="Quality">
+		<SubDataAttribute name="validity" type="ValidityKind" typeKind="ENUMERATED" presCond="M"/>
+		<SubDataAttribute name="detailQual" type="DetailQual" typeKind="CONSTRUCTED" presCond="M"/>
+		<SubDataAttribute name="source" type="SourceKind" typeKind="ENUMERATED" presCond="M"/>
+		<SubDataAttribute name="test" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="operatorBlocked" type="BOOLEAN" presCond="M"/>
+	</ConstructedAttribute>
+
+	<ConstructedAttribute name="DetailQual">
+		<SubDataAttribute name="overflow" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="outOfRange" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="badReference" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="oscillatory" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="failure" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="oldData" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="inconsistent" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="inaccurate" type="BOOLEAN" presCond="M"/>
+	</ConstructedAttribute>
+
+	<ConstructedAttribute name="TrgOps">
+		<SubDataAttribute name="data-change" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="quality-change" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="data-update" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="integrity" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="general-interrogation" type="BOOLEAN" presCond="M"/>
+	</ConstructedAttribute>
+
+	<ConstructedAttribute name="OptFlds">
+		<SubDataAttribute name="sequence-number" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="report-time-stamp" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="reason-for-inclusion" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="data-set-name" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="data-reference" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="buffer-overflow" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="entryID" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="conf-revision" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="segmentation" type="BOOLEAN" presCond="M"/>
+	</ConstructedAttribute>
+
+	<ConstructedAttribute name="SvOptFlds">
+		<SubDataAttribute name="refresh-time" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="reserved" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="sample-rate" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="data-set-name" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="sample-mode" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="synch-source-identity" type="BOOLEAN" presCond="M"/>
+	</ConstructedAttribute>
+
+	<ConstructedAttribute name="Check">
+		<SubDataAttribute name="synchrocheck" type="BOOLEAN" presCond="M"/>
+		<SubDataAttribute name="interlockCheck" type="BOOLEAN" presCond="M"/>
+	</ConstructedAttribute>
+
+	<Enumeration name="StepControlKind">
+		<Literal name="stop" literalVal="0"/>
+		<Literal name="lower" literalVal="1"/>
+		<Literal name="higher" literalVal="2"/>
+		<Literal name="reserved" literalVal="3"/>
+	</Enumeration>
+
+	<Enumeration name="DpStatusKind">
+		<Literal name="intermediate-state" literalVal="0"/>
+		<Literal name="off" literalVal="1"/>
+		<Literal name="on" literalVal="2"/>
+		<Literal name="bad-state" literalVal="3"/>
+	</Enumeration>
+
+	<Enumeration name="SourceKind">
+		<Literal name="process" literalVal="0"/>
+		<Literal name="substituted" literalVal="1"/>
+	</Enumeration>
+
+	<Enumeration name="ValidityKind">
+		<Literal name="good" literalVal="0"/>
+		<Literal name="invalid" literalVal="1"/>
+		<Literal name="reserved" literalVal="2"/>
+		<Literal name="questionable" literalVal="3"/>
+	</Enumeration>
+
+</NS>

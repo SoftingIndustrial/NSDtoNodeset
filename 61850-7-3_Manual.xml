@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Aliases>    
+	<Alias Alias="DefaultVariableRefType">ns=1;i=2</Alias>
+    <Alias Alias="DefaultObjectRefType">ns=1;i=1</Alias>
+    <Alias Alias="HasDataObject">ns=1;i=1</Alias>
+    <Alias Alias="HasDataAttribute">ns=1;i=2</Alias>
+  </Aliases>
+
+  <UAReferenceType NodeId="ns=1;i=1" BrowseName="1:HasDataObject">
+    <DisplayName>HasDataObject</DisplayName>
+    <Description>HasDataObject</Description>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=47</Reference>
+    </References>
+    <InverseName>DataObjectOf</InverseName>
+  </UAReferenceType>
+
+  <UAReferenceType NodeId="ns=1;i=2" BrowseName="1:HasDataAttribute">
+    <DisplayName>HasDataAttribute</DisplayName>
+    <Description>HasDataAttribute</Description>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=47</Reference>
+    </References>
+    <InverseName>DataAttributeOf</InverseName>
+  </UAReferenceType>
+
+</UANodeSet>

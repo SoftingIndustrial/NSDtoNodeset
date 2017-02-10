@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NS xmlns="http://www.iec.ch/61850/2016/NSD" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.iec.ch/61850/2016/NSD NSD.xsd" id="IEC 61850-6 OPC UA">
+
+	<AbstractObjectType name="IEC61850PhysicalBaseObjectType">
+	</AbstractObjectType>
+
+	<AbstractObjectType name="IEC61850ElectricalBaseObjectType">
+	</AbstractObjectType>
+
+	<ObjectType name="LDeviceType"  base="IEC61850PhysicalBaseObjectType">
+		<DataObject name="LN" type="IEC61850LNodeBaseObjectType" presCond="M" isArray="true" referenceType="HasLN"/>
+	</ObjectType>
+
+	<ObjectType name="ServerType"  base="IEC61850PhysicalBaseObjectType">
+		<DataObject name="LDevice" type="LDeviceType" presCond="M" isArray="true" referenceType="HasComponent"/>
+	</ObjectType>
+
+	<ObjectType name="AccessPointType"  base="IEC61850PhysicalBaseObjectType">
+		<DataObject name="LN" type="IEC61850LNodeBaseObjectType" presCond="O" isArray="true" referenceType="HasLN"/>
+		<DataObject name="Server" type="ServerType" presCond="O" referenceType="HasComponent"/>
+	</ObjectType>
+
+	<ObjectType name="IEDType" base="IEC61850PhysicalBaseObjectType">
+		<DataObject name="AccessPoint" type="AccessPointType" presCond="M" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="manufacturer" type="VisString255" presCond="M" fc="XX" referenceType="HasProperty"/>
+		<DataAttribute name="type" type="VisString255" presCond="M" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<Enumeration name="GeneralEquipmentKind">
+		<Literal name="AXN" literalVal="0"/>
+		<Literal name="BAT" literalVal="1"/>
+		<Literal name="MOT" literalVal="2"/>
+		<Literal name="FAN" literalVal="3"/>
+		<Literal name="FIL" literalVal="4"/>
+		<Literal name="PMP" literalVal="5"/>
+		<Literal name="VLV" literalVal="6"/>
+	</Enumeration>
+
+	<Enumeration name="ConductingEquipmentKind">
+		<Literal name="CBR" literalVal="0"/>
+		<Literal name="DIS" literalVal="1"/>
+		<Literal name="VTR" literalVal="2"/>
+		<Literal name="CTR" literalVal="3"/>
+		<Literal name="GEN" literalVal="4"/>
+		<Literal name="CAP" literalVal="5"/>
+		<Literal name="REA" literalVal="6"/>
+		<Literal name="CON" literalVal="7"/>
+		<Literal name="MOT" literalVal="8"/>
+		<Literal name="EFN" literalVal="9"/>
+		<Literal name="PSH" literalVal="10"/>
+		<Literal name="BAT" literalVal="11"/>
+		<Literal name="BSH" literalVal="12"/>
+		<Literal name="CAB" literalVal="13"/>
+		<Literal name="GIL" literalVal="14"/>
+		<Literal name="LIN" literalVal="15"/>
+		<Literal name="RRC" literalVal="16"/>
+		<Literal name="SAR" literalVal="17"/>
+		<Literal name="TCF" literalVal="18"/>
+		<Literal name="TCR" literalVal="19"/>
+		<Literal name="IFL" literalVal="20"/>
+		<Literal name="FAN" literalVal="21"/>
+		<Literal name="SCR" literalVal="22"/>
+		<Literal name="SMC" literalVal="23"/>
+	</Enumeration>
+
+	<Enumeration name="PowerTransformerKind">
+		<Literal name="PTR" literalVal="0"/>
+	</Enumeration>
+
+	<Enumeration name="TransformerWindingKind">
+		<Literal name="PTW" literalVal="0"/>
+	</Enumeration>
+
+	<Enumeration name="PhaseKind">
+		<Literal name="A" literalVal="0"/>
+		<Literal name="B" literalVal="1"/>
+		<Literal name="C" literalVal="2"/>
+		<Literal name="N" literalVal="3"/>
+		<Literal name="all" literalVal="4"/>
+		<Literal name="none" literalVal="5"/>
+		<Literal name="AB" literalVal="6"/>
+		<Literal name="BC" literalVal="7"/>
+		<Literal name="CA" literalVal="8"/>
+	</Enumeration>
+
+	<ConstructedAttribute name="ValueWithUnit">
+		<SubDataAttribute name="Value" type="FLOAT32" presCond="M"/>
+		<SubDataAttribute name="Unit" type="Unit" typeKind="CONSTRUCTED" presCond="M"/>
+	</ConstructedAttribute>
+
+	<AbstractObjectType name="LNodeContainerType" base="IEC61850ElectricalBaseObjectType">
+		<DataObject name="LNode" type="IEC61850LNodeBaseObjectType" presCond="O" isArray="true" referenceType="HasLNode"/>
+	</AbstractObjectType>
+
+	<AbstractObjectType name="EquipmentType" base="LNodeContainerType">
+	</AbstractObjectType>
+
+	<ObjectType name="EqSubFunctionType" base="LNodeContainerType">
+		<DataObject name="EqSubFunction" type="EqSubFunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="GenaralEquipement" type="GeneralEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Type" type="VisString255" presCond="O" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="EqFunctionType" base="LNodeContainerType">
+		<DataObject name="EqSubFunction" type="EqSubFunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="GenaralEquipement" type="GeneralEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Type" type="VisString255" presCond="O" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="GeneralEquipmentType" base="EquipmentType">
+		<DataObject name="EqFunction" type="EqFunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Type" type="GeneralEquipmentKind"  typeKind="ENUMERATED" presCond="O" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="SubEquipmentType" base="LNodeContainerType">
+		<DataObject name="EqFunction" type="EqFunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Phase" type="PhaseKind" typeKind="ENUMERATED" presCond="M" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<AbstractObjectType name="AbstractConductingEquipmentType" base="LNodeContainerType">
+		<DataObject name="SubEquipment" type="SubEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+	</AbstractObjectType>
+
+	<ObjectType name="TapChangerType" base="LNodeContainerType">
+		<DataAttribute name="Type" type="VisString255" presCond="O" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="TransformerWindingType" base="AbstractConductingEquipmentType">
+		<DataObject name="TapChanger" type="TapChangerType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Type" type="TransformerWindingKind" typeKind="ENUMERATED" presCond="M" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="PowerTransformerType" base="EquipmentType">
+		<DataObject name="TransformerWinding" type="TransformerWindingType" presCond="M" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Type" type="PowerTransformerKind" typeKind="ENUMERATED" presCond="M" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<AbstractObjectType name="EquipmentContainerType" base="LNodeContainerType">
+		<DataObject name="GeneralEquipment" type="GeneralEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="PowerTransformer" type="PowerTransformerType" presCond="O" isArray="true" referenceType="HasComponent"/>
+	</AbstractObjectType>
+
+	<ObjectType name="ConductingEquipmentType" base="AbstractConductingEquipmentType">
+		<DataObject name="EqFunction" type="EqFunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Type" type="ConductingEquipmentKind" typeKind="ENUMERATED" presCond="M" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="SubFunctionType" base="LNodeContainerType">
+		<DataObject name="ConductingEquipement" type="ConductingEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="SubFunction" type="SubFunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Type" type="VisString255" presCond="O" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="FunctionType" base="LNodeContainerType">
+		<DataObject name="ConductingEquipement" type="ConductingEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="SubFunction" type="SubFunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Type" type="VisString255" presCond="O" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<AbstractObjectType name="GeneralEquipmentContainerType" base="LNodeContainerType">
+		<DataObject name="Function" type="FunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="GeneralEquipment" type="GeneralEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+	</AbstractObjectType>
+
+	<ObjectType name="ConnectivityNodeType" base="LNodeContainerType">
+		<DataAttribute name="PathName" type="VisString255" presCond="M" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="BayType" base="EquipmentContainerType">
+		<DataObject name="ConductingEquipement" type="ConductingEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="ConnectivityNode" type="ConnectivityNodeType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="Function" type="FunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+	</ObjectType>
+
+	<ObjectType name="LineType" base="GeneralEquipmentContainerType">
+		<DataObject name="ConductingEquipement" type="ConductingEquipmentType" presCond="M" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="ConnectivityNode" type="ConnectivityNodeType" presCond="O" isArray="true" referenceType="HasComponent"/>
+	</ObjectType>
+
+	<ObjectType name="VoltageLevelType" base="EquipmentContainerType">
+		<DataObject name="Bay" type="BayType" presCond="M" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="Function" type="FunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataAttribute name="Voltage" type="ValueWithUnit" typeKind="CONSTRUCTED" presCond="M" fc="XX" referenceType="HasProperty"/>
+		<DataAttribute name="NomFreq" type="FLOAT32" presCond="O" fc="XX" referenceType="HasProperty"/>
+		<DataAttribute name="NumPhases" type="INT8U" presCond="O" fc="XX" referenceType="HasProperty"/>
+	</ObjectType>
+
+	<ObjectType name="SubstationType" base="EquipmentContainerType">
+		<DataObject name="VoltageLevel" type="VoltageLevelType" presCond="M" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="Function" type="FunctionType" presCond="O" isArray="true" referenceType="HasComponent"/>
+	</ObjectType>
+
+	<ObjectType name="ProcessType" base="GeneralEquipmentContainerType">
+		<DataObject name="ConductingEquipement" type="ConductingEquipmentType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="Line" type="LineType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="Process" type="ProcessType" presCond="O" isArray="true" referenceType="HasComponent"/>
+		<DataObject name="Substation" type="SubstationType" presCond="O" isArray="true" referenceType="HasComponent"/>
+	</ObjectType>
+
+</NS>

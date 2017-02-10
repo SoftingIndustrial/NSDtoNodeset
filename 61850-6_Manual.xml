@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Aliases>    
+    <Alias Alias="HasLN">ns=2;i=1</Alias>
+    <Alias Alias="HasLNode">ns=2;i=2</Alias>
+    <Alias Alias="HasTerminal">ns=2;i=3</Alias>
+  </Aliases>
+
+  <UAReferenceType NodeId="ns=2;i=1" BrowseName="1:HasLN">
+    <DisplayName>HasLN</DisplayName>
+    <Description>HasLN</Description>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=47</Reference>
+    </References>
+    <InverseName>LNOf</InverseName>
+  </UAReferenceType>
+
+  <UAReferenceType NodeId="ns=2;i=2" BrowseName="1:HasLNode">
+    <DisplayName>HasLNode</DisplayName>
+    <Description>HasLNode</Description>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=47</Reference>
+    </References>
+    <InverseName>LNodeOf</InverseName>
+  </UAReferenceType>
+
+  <UAReferenceType NodeId="ns=2;i=3" BrowseName="1:HasTerminal">
+    <DisplayName>HasTerminal</DisplayName>
+    <Description>HasTerminal</Description>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=32</Reference>
+    </References>
+    <InverseName>TerminalOf</InverseName>
+  </UAReferenceType>
+
+  <UAView NodeId="ns=2;i=4" BrowseName="1:Electrical view">
+    <DisplayName>Electrical view</DisplayName>
+    <Description>Electrical view</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>	  
+      <Reference ReferenceType="Organizes" IsForward="false">i=87</Reference>	
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+    </References> 
+  </UAView>
+
+  <UAView NodeId="ns=2;i=5" BrowseName="1:Physical view">
+    <DisplayName>Physical view</DisplayName>
+    <Description>Physical view</Description>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>	  
+      <Reference ReferenceType="Organizes" IsForward="false">i=87</Reference>	
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+    </References> 
+  </UAView>
+
+</UANodeSet>

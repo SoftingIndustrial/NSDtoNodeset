@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Aliases>    
+	<Alias Alias="DefaultVariableRefType">ns=1;i=2</Alias>
+    <Alias Alias="DefaultObjectRefType">ns=1;i=1</Alias>
+  </Aliases>
+
+</UANodeSet>
