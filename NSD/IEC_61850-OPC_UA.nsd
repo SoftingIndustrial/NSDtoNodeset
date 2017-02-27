@@ -99,4 +99,35 @@
 		<Literal name="questionable" literalVal="3"/>
 	</Enumeration>
 
+	<Enumeration name="AddCauseKind">
+		<Literal name="Unknown" literalVal="0"/>
+		<Literal name="Not-supported" literalVal="1"/>
+		<Literal name="Blocked-by-switching-hierarchy" literalVal="2"/>
+		<Literal name="Select-failed" literalVal="3"/>
+		<Literal name="Invalid-position" literalVal="4"/>
+		<Literal name="Position-reached" literalVal="5"/>
+		<Literal name="Parameter-change-in-execution" literalVal="6"/>
+		<Literal name="Step-limit" literalVal="7"/>
+		<Literal name="Blocked-by-Mode" literalVal="8"/>
+		<Literal name="Blocked-by-process" literalVal="9"/>
+		<Literal name="Blocked-by-interlocking" literalVal="10"/>
+		<Literal name="Blocked-by-synchrocheck" literalVal="11"/>
+		<Literal name="Command-already-in-execution" literalVal="12"/>
+		<Literal name="Blocked-by-health" literalVal="13"/>
+		<Literal name="1-of-n-control" literalVal="14"/>
+		<Literal name="Abortion-by-cancel" literalVal="15"/>
+		<Literal name="Time-limit-over" literalVal="16"/>
+		<Literal name="Abortion-by-trip" literalVal="17"/>
+		<Literal name="Object-not-selected" literalVal="18"/>
+		<Literal name="Object-already-selected" literalVal="19"/>
+		<Literal name="No-access-authority" literalVal="20"/>
+		<Literal name="Ended-with-overshoot" literalVal="21"/>
+		<Literal name="Abortion-due-to-deviation" literalVal="22"/>
+		<Literal name="Abortion-by-communication-loss" literalVal="23"/>
+		<Literal name="Blocked-by-command" literalVal="24"/>
+		<Literal name="None" literalVal="25"/>
+		<Literal name="Inconsistent-parameters" literalVal="26"/>
+		<Literal name="Locked-by-other-client" literalVal="27"/>
+	</Enumeration>
+
 </NS>

@@ -879,41 +879,51 @@ namespace NSDtoNodeset
                         string operateNodeId = getNodeId(String.Format("{0}|Method:Operate", parentPath));
                         XmlNode nodesetOperateMethodRef = addNodesetMethod(nodesetNode, "Operate", operateNodeId, parentNodeId, "Mandatory");
                         XmlNode nodesetOperateMethodIn = addNodesetMethodInputArguments(nodesetOperateMethodRef, operateNodeId);
-                        addNodesetMethodInputArgument(nodesetOperateMethodIn, "ctlVal", dataTypeName);
-                        addNodesetMethodInputArgument(nodesetOperateMethodIn, "test", getAliasDatatypeNodeId("Boolean"));
-                        addNodesetMethodInputArgument(nodesetOperateMethodIn, "synchroCheck", getAliasDatatypeNodeId("Boolean"));
-                        addNodesetMethodInputArgument(nodesetOperateMethodIn, "interlockCheck", getAliasDatatypeNodeId("Boolean"));
+                        addNodesetMethodArgument(nodesetOperateMethodIn, "ctlVal", dataTypeName);
+                        addNodesetMethodArgument(nodesetOperateMethodIn, "test", getAliasDatatypeNodeId("Boolean"));
+                        addNodesetMethodArgument(nodesetOperateMethodIn, "synchroCheck", getAliasDatatypeNodeId("Boolean"));
+                        addNodesetMethodArgument(nodesetOperateMethodIn, "interlockCheck", getAliasDatatypeNodeId("Boolean"));
+                        XmlNode nodesetOperateMethodOut = addNodesetMethodOutputArguments(nodesetOperateMethodRef, operateNodeId);
+                        addNodesetMethodArgument(nodesetOperateMethodOut, "addCause", getNodeId("Enumeration:AddCauseKind"));
 
                         if ((baseClassTypeName != "ENC") || (isAggregation))
                         {
                             string cancelNodeId = getNodeId(String.Format("{0}|Method:Cancel", parentPath));
-                            addNodesetMethod(nodesetNode, "Cancel", cancelNodeId, parentNodeId, "Mandatory");
+                            XmlNode nodesetCancelMethodRef = addNodesetMethod(nodesetNode, "Cancel", cancelNodeId, parentNodeId, "Mandatory");
+                            XmlNode nodesetCancelMethodOut = addNodesetMethodOutputArguments(nodesetCancelMethodRef, cancelNodeId);
+                            addNodesetMethodArgument(nodesetCancelMethodOut, "addCause", getNodeId("Enumeration:AddCauseKind"));
 
                             if (!isAggregation)
                             {
                                 string selectNodeId = getNodeId(String.Format("{0}|Method:Select", parentPath));
-                                addNodesetMethod(nodesetNode, "Select", selectNodeId, parentNodeId, "Optional");
+                                XmlNode nodesetSelectMethodRef = addNodesetMethod(nodesetNode, "Select", selectNodeId, parentNodeId, "Optional");
+                                XmlNode nodesetSelectMethodOut = addNodesetMethodOutputArguments(nodesetSelectMethodRef, selectNodeId);
+                                addNodesetMethodArgument(nodesetSelectMethodOut, "addCause", getNodeId("Enumeration:AddCauseKind"));
                             }
                         }
                         if (!isAggregation)
                         {
                             string selectVNodeId = getNodeId(String.Format("{0}|Method:SelectWithVal", parentPath));
-                            XmlNode nodesetselectVMethodRef = addNodesetMethod(nodesetNode, "SelectWithVal", selectVNodeId, parentNodeId, "Optional");
-                            XmlNode nodesetselectVMethodIn = addNodesetMethodInputArguments(nodesetselectVMethodRef, selectVNodeId);
-                            addNodesetMethodInputArgument(nodesetselectVMethodIn, "ctlVal", dataTypeName);
-                            addNodesetMethodInputArgument(nodesetselectVMethodIn, "operTm", getNodeId("Structure:Timestamp"));
-                            addNodesetMethodInputArgument(nodesetselectVMethodIn, "test", getAliasDatatypeNodeId("Boolean"));
-                            addNodesetMethodInputArgument(nodesetselectVMethodIn, "synchroCheck", getAliasDatatypeNodeId("Boolean"));
-                            addNodesetMethodInputArgument(nodesetselectVMethodIn, "interlockCheck", getAliasDatatypeNodeId("Boolean"));
+                            XmlNode nodesetSelectVMethodRef = addNodesetMethod(nodesetNode, "SelectWithVal", selectVNodeId, parentNodeId, "Optional");
+                            XmlNode nodesetSelectVMethodIn = addNodesetMethodInputArguments(nodesetSelectVMethodRef, selectVNodeId);
+                            addNodesetMethodArgument(nodesetSelectVMethodIn, "ctlVal", dataTypeName);
+                            addNodesetMethodArgument(nodesetSelectVMethodIn, "operTm", getNodeId("Structure:Timestamp"));
+                            addNodesetMethodArgument(nodesetSelectVMethodIn, "test", getAliasDatatypeNodeId("Boolean"));
+                            addNodesetMethodArgument(nodesetSelectVMethodIn, "synchroCheck", getAliasDatatypeNodeId("Boolean"));
+                            addNodesetMethodArgument(nodesetSelectVMethodIn, "interlockCheck", getAliasDatatypeNodeId("Boolean"));
+                            XmlNode nodesetSelectVMethodOut = addNodesetMethodOutputArguments(nodesetSelectVMethodRef, selectVNodeId);
+                            addNodesetMethodArgument(nodesetSelectVMethodOut, "addCause", getNodeId("Enumeration:AddCauseKind"));
 
                             string operateTNodeId = getNodeId(String.Format("{0}|Method:TimeActivatedOperate", parentPath));
                             XmlNode nodesetOperateTMethodRef = addNodesetMethod(nodesetNode, "TimeActivatedOperate", operateTNodeId, parentNodeId, "Optional");
                             XmlNode nodesetOperateTMethodIn = addNodesetMethodInputArguments(nodesetOperateTMethodRef, operateTNodeId);
-                            addNodesetMethodInputArgument(nodesetOperateTMethodIn, "ctlVal", dataTypeName);
-                            addNodesetMethodInputArgument(nodesetOperateTMethodIn, "operTm", getNodeId("Structure:Timestamp"));
-                            addNodesetMethodInputArgument(nodesetOperateTMethodIn, "test", getAliasDatatypeNodeId("Boolean"));
-                            addNodesetMethodInputArgument(nodesetOperateTMethodIn, "synchroCheck", getAliasDatatypeNodeId("Boolean"));
-                            addNodesetMethodInputArgument(nodesetOperateTMethodIn, "interlockCheck", getAliasDatatypeNodeId("Boolean"));
+                            addNodesetMethodArgument(nodesetOperateTMethodIn, "ctlVal", dataTypeName);
+                            addNodesetMethodArgument(nodesetOperateTMethodIn, "operTm", getNodeId("Structure:Timestamp"));
+                            addNodesetMethodArgument(nodesetOperateTMethodIn, "test", getAliasDatatypeNodeId("Boolean"));
+                            addNodesetMethodArgument(nodesetOperateTMethodIn, "synchroCheck", getAliasDatatypeNodeId("Boolean"));
+                            addNodesetMethodArgument(nodesetOperateTMethodIn, "interlockCheck", getAliasDatatypeNodeId("Boolean"));
+                            XmlNode nodesetOperateTMethodOut = addNodesetMethodOutputArguments(nodesetOperateTMethodRef, operateTNodeId);
+                            addNodesetMethodArgument(nodesetOperateTMethodOut, "addCause", getNodeId("Enumeration:AddCauseKind"));
                         }
 
                         // documentation
@@ -1087,13 +1097,37 @@ namespace NSDtoNodeset
             return addXmlElementAndOneAttribute(_nodesetDoc, nodesetInputValueNode, "ListOfExtensionObject", "xmlns", "http://opcfoundation.org/UA/2008/02/Types.xsd");
         }
 
-        void addNodesetMethodInputArgument(XmlNode nodeEOL, string name, string datatypeNodeId)
+        XmlNode addNodesetMethodOutputArguments(XmlNode nodesetMethodRef, string nodeId)
         {
-            XmlNode nodesetInputValueEONode = addXmlElement(_nodesetDoc, nodeEOL, "ExtensionObject");
-            XmlNode nodesetInputValueTypeIdNode = addXmlElement(_nodesetDoc, nodesetInputValueEONode, "TypeId");
-            XmlNode nodesetInputValueId = addXmlElement(_nodesetDoc, nodesetInputValueTypeIdNode, "Identifier", "i=297");
-            XmlNode nodesetInputBodyNode = addXmlElement(_nodesetDoc, nodesetInputValueEONode, "Body");
-            XmlNode nodesetArgNode = addXmlElement(_nodesetDoc, nodesetInputBodyNode, "Argument");
+            string nodeIdOutput =  getNodeId(String.Format("{0}-OutputArguments", nodeId));
+
+            addXmlElementAndOneAttribute(_nodesetDoc, nodesetMethodRef, "Reference", nodeIdOutput, "ReferenceType", "HasProperty");
+
+            XmlNode outputArgumentsNode = addXmlElement(_nodesetDoc, _nodesetUANodeSetNode, "UAVariable");
+            addXmlAttribute(_nodesetDoc, outputArgumentsNode, "NodeId", nodeIdOutput);
+            addXmlAttribute(_nodesetDoc, outputArgumentsNode, "BrowseName", "OutputArguments");
+            addXmlAttribute(_nodesetDoc, outputArgumentsNode, "ParentNodeId", nodeId);
+            addXmlAttribute(_nodesetDoc, outputArgumentsNode, "DataType", "i=296");
+            addXmlAttribute(_nodesetDoc, outputArgumentsNode, "ValueRank", "-1");
+
+            addXmlElement(_nodesetDoc, outputArgumentsNode, "DisplayName", "OutputArguments");
+
+            XmlNode nodesetOutputReferencesNode = addXmlElement(_nodesetDoc, outputArgumentsNode, "References");
+            addXmlElementAndTwoAttributes(_nodesetDoc, nodesetOutputReferencesNode, "Reference", nodeId, "ReferenceType", "HasProperty", "IsForward", "false");
+            addXmlElementAndOneAttribute(_nodesetDoc, nodesetOutputReferencesNode, "Reference", "Mandatory", "ReferenceType", "HasModellingRule");
+            addXmlElementAndOneAttribute(_nodesetDoc, nodesetOutputReferencesNode, "Reference", "i=68", "ReferenceType", "HasTypeDefinition");
+
+            XmlNode nodesetOutputValueNode = addXmlElement(_nodesetDoc, outputArgumentsNode, "Value");
+            return addXmlElementAndOneAttribute(_nodesetDoc, nodesetOutputValueNode, "ListOfExtensionObject", "xmlns", "http://opcfoundation.org/UA/2008/02/Types.xsd");
+        }
+
+        void addNodesetMethodArgument(XmlNode nodeEOL, string name, string datatypeNodeId)
+        {
+            XmlNode nodesetValueEONode = addXmlElement(_nodesetDoc, nodeEOL, "ExtensionObject");
+            XmlNode nodesetValueTypeIdNode = addXmlElement(_nodesetDoc, nodesetValueEONode, "TypeId");
+            XmlNode nodesetValueId = addXmlElement(_nodesetDoc, nodesetValueTypeIdNode, "Identifier", "i=297");
+            XmlNode nodesetBodyNode = addXmlElement(_nodesetDoc, nodesetValueEONode, "Body");
+            XmlNode nodesetArgNode = addXmlElement(_nodesetDoc, nodesetBodyNode, "Argument");
             addXmlElement(_nodesetDoc, nodesetArgNode, "Name", name);
             XmlNode nodesetArgDTNode = addXmlElement(_nodesetDoc, nodesetArgNode, "DataType");
             addXmlElement(_nodesetDoc, nodesetArgDTNode, "Identifier", datatypeNodeId);
@@ -1480,7 +1514,7 @@ namespace NSDtoNodeset
 
             string binarySchemaUriNodeId = getNodeId(String.Format("{0}_NamespaceUri", _nodeIdTextBinarySchema));
             XmlNode nodesetBinarySchemaNode = addXmlElementAndTwoAttributes(_nodesetDoc, _nodesetUANodeSetNode, "UAVariable", "NodeId", getNodeId(_nodeIdTextBinarySchema), "BrowseName", String.Format("{0}:Opc.Ua.{1}", _nsIdx, _nodesetTypeDictionaryName));
-            addXmlAttribute(_nodesetDoc, nodesetBinarySchemaNode, "SymbolicName", String.Format("{0}_BinarySchema", _nodesetTypeDictionaryName));
+            addXmlAttribute(_nodesetDoc, nodesetBinarySchemaNode, "SymbolicName", "BinarySchema");
             addXmlAttribute(_nodesetDoc, nodesetBinarySchemaNode, "DataType", "ByteString");
             addXmlElement(_nodesetDoc, nodesetBinarySchemaNode, "DisplayName", String.Format("Opc.Ua.{0}", _nodesetTypeDictionaryName));
 
@@ -1512,7 +1546,7 @@ namespace NSDtoNodeset
 
             string xmlSchemaUriNodeId = getNodeId(String.Format("{0}_NamespaceUri", _nodeIdTextXmlSchema));
             XmlNode nodesetxmlSchemaNode = addXmlElementAndTwoAttributes(_nodesetDoc, _nodesetUANodeSetNode, "UAVariable", "NodeId", getNodeId(_nodeIdTextXmlSchema), "BrowseName", String.Format("{0}:Opc.Ua.{1}", _nsIdx, _nodesetTypeDictionaryName));
-            addXmlAttribute(_nodesetDoc, nodesetxmlSchemaNode, "SymbolicName", String.Format("{0}_XmlSchema", _nodesetTypeDictionaryName));
+            addXmlAttribute(_nodesetDoc, nodesetxmlSchemaNode, "SymbolicName", "XmlSchema");
             addXmlAttribute(_nodesetDoc, nodesetxmlSchemaNode, "DataType", "ByteString");
             addXmlElement(_nodesetDoc, nodesetxmlSchemaNode, "DisplayName", String.Format("Opc.Ua.{0}", _nodesetTypeDictionaryName));
 
