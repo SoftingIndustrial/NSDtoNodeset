@@ -21,8 +21,12 @@ Microsoft Visual Studio 2015 is used to build it.
   Name of the generated nodeset file
 * /nodesetUrl < URL string ><br>
   URL used for the generation of the nodeset
+* /nodesetModelVersion < version string ><br>
+  Version of the nodeset model
 * /nodesetUrlBase < URL string ><br>
   Nodeset URL of the base types passed with /ndsBase
+* /nodesetModelBaseVersion < version string ><br>
+  Version of the base nodeset model
 * /nodesetTypeDictionary < name ><br>
   Name of the type dictionary in the nodeset
   <br> [optional; default: "NSDtoNodeset"]
