@@ -55,6 +55,8 @@ namespace NSDtoNodeset
         String _wordFileName;
         Int32 _nextNodeId;
         Int32 _nsIdx;
+        String _nodesetModelBaseVersion;
+        String _nodesetModelVersion;
 
         Application _wordApp = null;
         Document _wordDoc = null;
@@ -95,7 +97,7 @@ namespace NSDtoNodeset
             {
                 if (command == "")
                 { // no command set -> has to be specified
-                    if ((arg == "/nsd") || (arg == "/nsdBase") || (arg == "/nodeset") || (arg == "/nodesetUrl")  || (arg == "/nodesetUrlBase") || (arg == "/nodesetTypeDictionary") || (arg == "/nodesetImport") || (arg == "/nodesetStartId") || (arg == "/nodeIdMap")  || (arg == "/nodeIdMapBase") || (arg == "/binaryTypes") || (arg == "/xmlTypes") || (arg == "/word"))
+                    if ((arg == "/nsd") || (arg == "/nsdBase") || (arg == "/nodeset") || (arg == "/nodesetUrl")  || (arg == "/nodesetUrlBase") || (arg == "/nodesetTypeDictionary") || (arg == "/nodesetImport") || (arg == "/nodesetStartId") || (arg == "/nodeIdMap")  || (arg == "/nodeIdMapBase") || (arg == "/binaryTypes") || (arg == "/xmlTypes") || (arg == "/word") || (arg == "/nodesetModelVersion") || (arg == "/nodesetModelBaseVersion"))
                     {
                         command = arg;
                     }
@@ -162,6 +164,15 @@ namespace NSDtoNodeset
                     {
                         _wordFileName = arg;
                     }
+                    else if (command == "/nodesetModelVersion")
+                    {
+                        _nodesetModelVersion = arg;
+                    }
+                    else if (command == "/nodesetModelBaseVersion")
+                    {
+                        _nodesetModelBaseVersion = arg;
+                    }
+
                     command = "";
                 }
             }
@@ -185,6 +196,24 @@ namespace NSDtoNodeset
                 addXmlElement(_nodesetDoc, _nodesetNamespaceUrisNode, "Uri", _nodesetURLBase);
             }
             addXmlElement(_nodesetDoc, _nodesetNamespaceUrisNode, "Uri", _nodesetURL);
+
+            XmlNode nodesetModelsNode = addXmlElement(_nodesetDoc, _nodesetUANodeSetNode, "Models");
+            XmlNode nodesetModelNode = addXmlElement(_nodesetDoc, nodesetModelsNode, "Model");
+            addXmlAttribute(_nodesetDoc, nodesetModelNode, "ModelUri", _nodesetURL);
+            if (_nodesetModelVersion != "")
+            {
+                addXmlAttribute(_nodesetDoc, nodesetModelNode, "Version", _nodesetModelVersion);
+            }
+            if (_nodesetURLBase != "")
+            {
+                XmlNode nodesetReqModelsNode = addXmlElement(_nodesetDoc, nodesetModelNode, "RequiredModels");
+                XmlNode nodesetReqModelNode = addXmlElement(_nodesetDoc, nodesetReqModelsNode, "Model");
+                addXmlAttribute(_nodesetDoc, nodesetReqModelNode, "ModelUri", _nodesetURLBase);
+                if (_nodesetModelBaseVersion != "")
+                {
+                    addXmlAttribute(_nodesetDoc, nodesetReqModelNode, "Version", _nodesetModelBaseVersion);
+                } 
+            }
 
             addAliases();
 
