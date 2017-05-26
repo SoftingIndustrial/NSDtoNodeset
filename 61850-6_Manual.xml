@@ -34,9 +34,9 @@
     <InverseName>TerminalOf</InverseName>
   </UAReferenceType>
 
-  <UAView NodeId="ns=2;i=4" BrowseName="1:Electrical view">
-    <DisplayName>Electrical view</DisplayName>
-    <Description>Electrical view</Description>
+  <UAView NodeId="ns=2;i=4" BrowseName="1:ProcessView">
+    <DisplayName>Process view</DisplayName>
+    <Description>Process view</Description>
     <References>
       <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>	  
       <Reference ReferenceType="Organizes" IsForward="false">i=87</Reference>	
@@ -44,9 +44,9 @@
     </References> 
   </UAView>
 
-  <UAView NodeId="ns=2;i=5" BrowseName="1:Physical view">
-    <DisplayName>Physical view</DisplayName>
-    <Description>Physical view</Description>
+  <UAView NodeId="ns=2;i=5" BrowseName="1:IEDView">
+    <DisplayName>IED view</DisplayName>
+    <Description>IED view</Description>
     <References>
       <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>	  
       <Reference ReferenceType="Organizes" IsForward="false">i=87</Reference>	
